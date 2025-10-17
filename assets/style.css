@@ -1,0 +1,188 @@
+/* latin-ext */
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Roboto'), local('Roboto-Regular'), local('sans-serif'), url('../vendors/roboto-latin-ext.woff2') format('woff2');
+    unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Roboto'), local('Roboto-Regular'), local('sans-serif'), url('../vendors/roboto-latin.woff2') format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+}
+
+#scan::before {
+    background-image: url("btn-scan.svg");
+}
+
+#scan[disabled]::before {
+    background-image: url("btn-scan-disabled.svg");
+}
+
+#resume::before,
+#record::before {
+    background-image: url("btn-record.svg");
+}
+
+#resume[disabled]::before,
+#record[disabled]::before {
+    background-image: url("btn-record-disabled.svg");
+}
+
+#stop::before {
+    background-image: url("btn-stop.svg");
+}
+
+#stop[disabled]::before {
+    background-image: url("btn-stop-disabled.svg");
+}
+
+#pause::before {
+    background-image: url("btn-pause.svg");
+}
+
+#pause[disabled]::before {
+    background-image: url("btn-pause-disabled.svg");
+}
+
+#save::before {
+    background-image: url("btn-save.svg");
+}
+
+#save[disabled]::before {
+    background-image: url("btn-save-disabled.svg");
+}
+
+#copy::before {
+    background-image: url("icon-copy.svg");
+}
+
+.copy-ok#copy::before {
+    background-image: url("icon-ok.svg");
+}
+
+.copy-fail#copy::before {
+    background-image: url("icon-fail.svg");
+}
+
+#settings::before {
+    background-image: url("icon-settings.svg");
+}
+
+#info::before {
+    background-image: url("icon-info.svg");
+}
+
+#like::before {
+    background-image: url("icon-like.svg");
+}
+
+#update::before {
+  background-image: url("btn-update.svg");
+}
+
+#reset::before {
+  background-image: url("btn-reset.svg");
+}
+
+#pom::before {
+    background-image: url("btn-update.svg"); /* added baground image to button" */
+}
+
+:root{
+    /* Move away from deep navy. Use graphite/charcoal base with warm-neutral highlights. */
+    --bg: #0b0d0f; /* near-black graphite */
+    --panel: linear-gradient(180deg,#0f1416,#0b0d0f); /* subtle depth with neutral tone */
+    --muted: #94a3b8; /* cool-muted for secondary text */
+    --text: #e6eef8; /* main text */
+    --accent: #06b6d4; /* brighter teal for buttons */
+    --accent-2: #0ea5a4; /* teal secondary for gradients */
+    --accent-weak: #dff8f7; /* pale accent used on surfaces */
+    --surface: #0e1112; /* card surface */
+    --glass: rgba(255,255,255,0.03);
+    --radius: 12px;
+    --shadow: 0 10px 30px rgba(2,6,23,0.55);
+}
+
+*{box-sizing:border-box}
+html{font-size:15px}
+body{
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif;
+    color: var(--text);
+    background: linear-gradient(180deg,var(--bg),#0b0d0f);
+    margin:0;
+    padding:14px;
+    -webkit-font-smoothing:antialiased;
+}
+
+.container{
+    /* restore larger minimum width for popup usability */
+    min-width: 600px;
+    max-width:880px;
+    margin:0 auto;
+    background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+    border-radius: var(--radius);
+    padding: 16px;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(255,255,255,0.03);
+    color: var(--text);
+}
+
+/* When used as an extension popup, ensure minimum usable size */
+.extension-popup.container{
+    min-width: 340px;
+    min-height: 420px;
+    padding: 16px;
+}
+
+.panel-row{margin:14px 0}
+.pad{padding:12px}
+
+.card{
+    background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+    border-radius: calc(var(--radius) - 2px);
+    padding:14px;
+    border: 1px solid rgba(255,255,255,0.04);
+}
+
+.heading{font-weight:700;color:var(--muted);margin-bottom:8px}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:10px;padding:12px 16px;border-radius:12px;border:none;background:transparent;color:var(--accent);cursor:pointer;font-weight:700;font-size:15px}
+.btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:rgba(4,6,7,0.98);font-weight:800;box-shadow:0 6px 18px rgba(6,182,212,0.12)}
+.btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
+.btn:disabled{opacity:0.45;cursor:not-allowed}
+
+.btn::before{height:18px;width:18px}
+
+/* inputs */
+input[type="text"], input[type="password"], select, textarea{
+    width:100%;padding:12px;border-radius:10px;background:rgba(255,255,255,0.015);border:1px solid rgba(255,255,255,0.04);color:var(--text);transition:box-shadow .12s ease,border-color .12s ease
+}
+
+input[type="text"]:focus,input[type="password"]:focus,select:focus,textarea:focus{outline:none;border-color:rgba(6,182,212,0.95);box-shadow:0 8px 26px rgba(6,182,212,0.09)}
+
+textarea{min-height:130px;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace;color:#dbeafe}
+
+/* sortable chips */
+#sortable{display:flex;gap:8px;flex-wrap:wrap;padding:6px 0}
+#sortable li{list-style:none;padding:8px 10px;border-radius:999px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.03);cursor:grab}
+
+.badge{display:inline-block;padding:6px 10px;border-radius:999px;background:linear-gradient(90deg,var(--accent-weak),rgba(255,255,255,0.01));color:var(--accent);font-weight:800}
+
+/* chat bubbles */
+.chat-window{max-height:320px;overflow:auto;padding:12px;display:flex;flex-direction:column;gap:12px}
+.chat-bubble{max-width:78%;padding:14px 16px;border-radius:16px;color:var(--text)}
+.chat-user{align-self:flex-end;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:rgba(3,6,7,0.95);border-bottom-right-radius:8px}
+.chat-assistant{align-self:flex-start;background:linear-gradient(90deg,rgba(6,182,212,0.06),rgba(14,165,164,0.03));color:var(--text);border-bottom-left-radius:8px}
+
+.icon{width:28px;height:28px}
+
+.hidden{display:none}
+
+/* responsive tweaks */
+@media (max-width:720px){.container{padding:10px;border-radius:8px}.chat-window{max-height:200px}}
