@@ -13,3 +13,6 @@ archive/
 node_modules/
 docs/mqtt-pattern.md
 docs/qms-mqtt-topics.md
+
+# e2e test profile (Playwright user data)
+.e2e-profile/

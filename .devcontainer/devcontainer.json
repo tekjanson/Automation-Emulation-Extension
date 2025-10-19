@@ -1,5 +1,5 @@
 {
-	"name": "Node.js",
+	"name": "Node.js & Chromium (Chrome Extension Dev)",
 	"build": {
 		"dockerfile": "Dockerfile"
 	},
@@ -7,20 +7,29 @@
 	// Configure tool-specific properties.
 	"customizations": {
 		// Configure properties specific to VS Code.
-	"vscode": {
+		"vscode": {
 			// Add the IDs of extensions you want installed when the container is created.
 			"extensions": [
-				"dbaeumer.vscode-eslint"
+				"dbaeumer.vscode-eslint",
+				"msjsdiag.debugger-for-chrome",
+				"eamodio.gitlens",
+				"ms-vscode.vscode-browser-preview"
 			]
 		}
 	},
 
-	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// "forwardPorts": [],
+	// Forward Chrome remote debugging port so you can attach from the host.
+	"forwardPorts": [9222],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
 	"postCreateCommand": "npm install",
 
+	// Helpful mounts: give Chrome enough shared memory to avoid crashes when running in container.
+	"mounts": [
+		"source=devcontainer-shm,target=/dev/shm,type=volume"
+	],
+
+	// Provide a small helper script and keep container non-root for typical workflows.
 	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
 	"remoteUser": "node"
 }

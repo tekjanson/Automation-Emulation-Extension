@@ -19,12 +19,12 @@
       "<all_urls>"
     ],
     "js": [
-      "./src/logger.js",
-      "./src/locator/xpath-locator.js",
-      "./src/locator/tree-builder.js",
-      "./src/locator/classifier.js",
-      "./src/locator/scanner.js",
-      "./src/content.js"
+      "src/logger.js",
+      "src/locator/xpath-locator.js",
+      "src/locator/tree-builder.js",
+      "src/locator/classifier.js",
+      "src/locator/scanner.js",
+      "src/content.js"
     ],
     "run_at": "document_end",
     "all_frames": true
