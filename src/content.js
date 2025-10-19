@@ -11,7 +11,15 @@ console.debug('[WebBuddy content] Script execution started.');
 if (window.__web_buddy_content_injected) {
   console.debug('[WebBuddy content] already injected, skipping');
 } else {
-  window.__web_buddy_content_injected = true;
+    window.__web_buddy_content_injected = true;
+    try {
+      // Set a DOM-visible marker so test harnesses running in the page main
+      // world can detect that the content script executed. Content scripts run
+      // in an isolated world, so `window` flags aren't visible to page.evaluate.
+      if (document && document.documentElement && typeof document.documentElement.setAttribute === 'function') {
+        document.documentElement.setAttribute('data-web-buddy-injected', '1');
+      }
+    } catch (e) { /* ignore */ }
 
   (function contentScriptModule() {
     const host = chrome;

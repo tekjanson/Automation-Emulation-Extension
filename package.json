@@ -10,6 +10,7 @@
     "lint": "eslint .",
     "lint-fix": "eslint . --fix",
     "test-local": "mocha -r test/setup.js test/* --reporter spec",
+    "e2e": "xvfb-run -a node test/run_e2e.js",
     "test": "npm run lint && npm run test-local",
     "export": "./script/export.command",
   "build": "mkdir -p dist && zip -r dist/web-buddy.zip . -x node_modules/** -x .git/** -x dist/** -x docs/**",
@@ -34,6 +35,7 @@
     "jsdom": "^11.12.0",
     "mocha": "^5.2.0",
     "sinon-chrome": "^2.3.2"
+    ,"playwright-core": "^1.40.0"
   },
   "dependencies": {
     "mqtt": "^5.0.1"

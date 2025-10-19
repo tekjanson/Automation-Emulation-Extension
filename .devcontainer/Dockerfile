@@ -1,16 +1,45 @@
-# See here for image contents: https://github.com/microsoft/vscode-dev-containers/tree/v0.245.2/containers/javascript-node/.devcontainer/base.Dockerfile
+# Use official Node image as base
+FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:20
 
-# [Choice] Node.js version (use -bullseye or -buster to pin to an OS version): 18, 16, 14
-ARG VARIANT="16-bullseye"
-FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:0-${VARIANT}
+# Do not download browsers during playwright install; we'll use system Chromium
+ENV PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1
 
-# [Optional] Uncomment this section to install additional OS packages.
-# RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \ 
-#     && apt-get -y install --no-install-recommends <your-package-list-here>
+# Install Chromium, Xvfb and utilities required for running headful/headless Chromium inside the container
+ARG DEBIAN_FRONTEND=noninteractive
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        ca-certificates \
+        wget \
+        gnupg \
+        fonts-liberation \
+        fonts-lato \
+        libasound2 \
+        libatk-bridge2.0-0 \
+        libgtk-3-0 \
+        libxss1 \
+        libnss3 \
+        libx11-xcb1 \
+        libxcomposite1 \
+        libxdamage1 \
+        libxrandr2 \
+        libdbus-1-3 \
+        libgbm1 \
+        xvfb \
+        xauth \
+        x11-utils \
+        x11-xserver-utils \
+        mesa-utils \
+        procps \
+    && rm -rf /var/lib/apt/lists/*
 
-# [Optional] Uncomment if you want to install an additional version of node using nvm
-# ARG EXTRA_NODE_VERSION=10
-# RUN su node -c "source /usr/local/share/nvm/nvm.sh && nvm install ${EXTRA_NODE_VERSION}"
+# Install Chromium from Debian repos (stable). This is lightweight and works for extension development.
+RUN apt-get update && apt-get install -y chromium \
+    && rm -rf /var/lib/apt/lists/*
 
-# [Optional] Uncomment if you want to install more global node packages
-# RUN su node -c "npm install -g <your-package-list-here>"
+# Add a non-root user (the base image already creates 'node' user)
+USER node
+
+WORKDIR /workspace
+
+# Install node modules later via postCreateCommand in devcontainer.json
+CMD ["/bin/bash"]
